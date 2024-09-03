@@ -99,15 +99,15 @@
                     <h3>Team Member ${teamMemberCount + 1}</h3>
                     <div class="mb-3">
                         <label for="tm-name" class="form-label">Team Member ${teamMemberCount + 1} Name</label>
-                        <input type="text" name="tm-name[]" id="tm-name" placeholder="Enter Team Member Name" class="form-control" required>
+                        <input type="text" name="tm-name-${teamMemberCount}" id="tm-name" placeholder="Enter Team Member Name" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label for="tm-phone" class="form-label">Team Member ${teamMemberCount + 1} Phone</label>
-                        <input type="tel" name="tm-phone[]" id="tm-phone" placeholder="Enter Team Member Phone" class="form-control" required>
+                        <input type="tel" name="tm-phone-${teamMemberCount}" id="tm-phone" placeholder="Enter Team Member Phone" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label for="tm-gender" class="form-label">Team Member ${teamMemberCount + 1} Gender</label>
-                        <select name="tm-gender[]" id="tm-gender" class="form-control" required>
+                        <select name="tm-gender-${teamMemberCount}" id="tm-gender" class="form-control" required>
                             <option value="">Select Gender</option>
                             <option value="MALE">Male</option>
                             <option value="FEMALE">Female</option>
@@ -116,11 +116,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="tm-dept" class="form-label">Team Member ${teamMemberCount + 1} Department</label>
-                        <input type="text" name="tm-dept[]" id="tm-dept" placeholder="Enter Team Member Department" class="form-control" required>
+                        <input type="text" name="tm-dept-${teamMemberCount}" id="tm-dept" placeholder="Enter Team Member Department" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label for="tm-year" class="form-label">Team Member ${teamMemberCount + 1} Year</label>
-                        <select name="tm-year[]" id="tm-year" class="form-control" required>
+                        <select name="tm-year-${teamMemberCount}" id="tm-year" class="form-control" required>
                             <option value="">Select Year</option>
                             <option value="I">I</option>
                             <option value="II">II</option>
