@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Team</title>
-    <link rel="stylesheet" href="./css js/our team.css">
+    <link rel="stylesheet" href="./assets/css/our team.css">
 </head>
 <body>
     <video autoplay muted loop id="myVideo">
@@ -12,7 +12,7 @@
       </video>
     <div class="container">
         <div class="team-section" id="staff-coordinator">
-            <h2>DIRECTOR OF CSE DEPARTMENT</h2>
+           
             <div class="member">
                 <h3>Dr.G.SIVAKUMAR</h3>
                 <p>HEAD OF CSE DEPARTMENT</p>
@@ -57,34 +57,19 @@
                 <p>Co-ordinator</p>
             </div>
             <div class="member">
-                <h3>RAJ KUMAR JHA</h3>
-                <p>Co-ordinator</p>
-            </div>
-            <div class="member">
-                <h3>HARI K</h3>
+                <h3>NITHITHA A</h3>
                 <p>Co-ordinator</p>
             </div>
             <div class="member">
                 <h3>HARIHARAN V</h3>
                 <p>Co-ordinator</p>
             </div>
-        </div>
-        <div class="team-section" id="web-designer">
-            <h2>WEB DESIGNER</h2>
             <div class="member">
-                <h3>SIVANANDH CC</h3>
-                <p>Lead Designer|Front-End Designer</p>
-            </div>
-            <div class="member">
-                <h3>SIVABHARATHI S</h3>
-                <p>DATABASE Designer|Front-End supporter</p>
-            </div>
-            <div class="member">
-                <h3>RAJKUMAR JHA</h3>
-                <p>BACK-End Developer</p>
+                <h3>HARI K</h3>
+                <p>Co-ordinator</p>
             </div>
         </div>
     </div>
-    <script src="./css js/our team .js"></script>
+    <script src="./assets/js/our team .js"></script>
 </body>
 </html>

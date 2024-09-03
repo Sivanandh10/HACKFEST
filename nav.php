@@ -11,16 +11,16 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="./#section1">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link" href="./#section2">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Schedule</a>
+                    <a class="nav-link" href="./#section3">Schedule</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Contact</a>
+                    <a class="nav-link" href="./#contact">Contact</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./register.php">Register</a>

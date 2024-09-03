@@ -14,18 +14,18 @@
 </head>
 
 <body>
-
-    <?php
-    include "./nav.php";
-    ?>
-
+<div class="cont-loader">
+    
     <div id="loader">
         <img src="./assets/img/logo.png" alt="Loading..." />
     </div>
-
     <div id="content" style="display: none;">
-        <script src="./assets/js/loader.js"></script>
-        <div id="animatedText">Explore your ideas! Register fast...</div>
+    <?php
+    include "./nav.php";
+    ?>
+      
+        <script src="./assets/js/loader.js"></script></div>
+        <div id="animatedText">Explore your ideas! Register fast..!</div>
         <script>
             const textElement = document.getElementById('animatedText');
             const originalText = textElement.innerText;
@@ -35,8 +35,6 @@
             }
             setInterval(updateText, 4000);
         </script>
-
-
         <div class="timer" id="countdown">
             <div id="days" class="flip-card">
                 <div class="flip-card-inner">
@@ -63,43 +61,35 @@
                 </div>
             </div>
         </div>
-
-
         <div class="dhms">
             <p>Days</p>
             <p>Hrs</p>
             <p>Min</p>
             <p>Sec</p>
         </div>
-
-
         <a href="register.php"><button class="button" id="register">Register</button></a>
-        <script src="./css js/time.js"></script>
-        <script src="./css js/button.js"></script>
+        <script src=".assets/js/time.js"></script>
+        <script src=".assets/js/button.js"></script>
         <div class="glow">
             <h3>Registration Is Free</h3>
-            <h4>Shortlisted Team Has To Pay Rs.350/perHead</h4>
+            <h4>Shortlisted Ideas Has To Pay Rs.350/perHead</h4>
         </div>
         <video autoplay muted loop id="myVideo">
             <source src="./assets/video/bg.mp4" type="video/mp4">
         </video>
-
         <script src="./assets/js/time.js"></script>
-
         <a href="https://chat.whatsapp.com/BAvgvsx6lJ2CzaKIaq7dGn"><img width="50px" height="50px"
                 src="./assets/img/whatsapp logo.png" alt="" class="wha-logo"><span></span></a>
         <a href="https://ig.me/j/AbbKIpeVdKUA2nw5/">
             <img width="50px" height="50px" src="./assets/img/insta logo.png" alt=""
                 class="insta-logo"><span></span></a>
         <br>
-
-
         <section id="section1">
             <div class="home">
                 <h1 class="hackfest">HACKFEST</h1>
-                <img src="./assets/img/pngwing.png" alt="innovative idea"
+                <img src="./assets/img/pngwing.com.png" alt="innovative idea"
                     width="250px " height="250px" class="home-img">
-                <h3 class="home-para">"Join our 36-hour hackfest where innovators, developers, and designers come
+                <h3 class="home-para">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Join our 36-hour hackfest where innovators, developers, and designers come
                     together to solve real-world problems. Collaborate, create, and compete to build innovative
                     solutions using the latest technologies. Enjoy mentorship from industry experts, prizes for
                     outstanding projects, and networking opportunities with like-minded individuals. Showcase your
@@ -108,43 +98,41 @@
                     gather your team, register now, and get ready to hack, learn, and grow!"</h3>
             </div>
         </section>
-
-
         <section>
             <div class="slider">
                 <h1 class="sponser">SPONSORS</h1>
                 <div class="slide-track">
                     <div class="slide">
-                        <img src="./assets/livewire.png" alt="SPONSERSHIP">
+                        <img src="./assets/img/livewire.png" alt="SPONSERSHIP">
                     </div>
                     <div class="slide">
-                        <img src="./assets/livewire.png" alt="SPONSERSHIP">
-                    </div>
-
-                    <div class="slide">
-                        <img src="./assets/livewire.png" alt="SPONSERSHIP">
+                        <img src="./assets/img/livewire.png" alt="SPONSERSHIP">
                     </div>
 
                     <div class="slide">
-                        <img src="./assets/livewire.png" alt="SPONSERSHIP">
+                        <img src="./assets/img/livewire.png" alt="SPONSERSHIP">
                     </div>
 
                     <div class="slide">
-                        <img src="./assets/livewire.png" alt="SPONSERSHIP">
+                        <img src="./assets/img/livewire.png" alt="SPONSERSHIP">
+                    </div>
+
+                    <div class="slide">
+                        <img src="./assets/img/livewire.png" alt="SPONSERSHIP">
                     </div>
                 </div>
             </div>
         </section>
         <section id="section2">
             <div class="about">
-                <img src="./assets/about-logo.com (1).png" alt="ABOUT US" class="ab">
+                <img src="./assets/img/about-logo.com (1).png" alt="ABOUT US" class="ab">
             </div>
             <div class="abo-container">
                 <div class="abo-wrapper">
-                    <img src="./assets/mainblock.png">
-                    <img src="./assets/slide2.webp">
-                    <img src="./assets/arvr.jpeg">
-                    <img src="./assets/lib.webp">
+                    <img src="./assets/img/mainblock.png">
+                    <img src="./assets/img/slide2.webp">
+                    <img src="./assets/img/arvr.jpeg">
+                    <img src="./assets/img/lib.webp">
                 </div>
             </div>
             <div class="obj-abo">
@@ -153,13 +141,12 @@
                     technology. Established in 1996, ESEC is affiliated with Anna University and approved by AICTE, New
                     Delhi. The college is recognized for its commitment to excellence in education, research, and
                     innovation."</h3>
-                <div class="vi-but"><a href="https://erode-sengunthar.ac.in/"><button class="visit-site"><b>VISIT
-                                SITE</b></button></a></div>
+                <div class="vi-but"><a href="https://erode-sengunthar.ac.in/"><button class="visit-site"><b>VISIT SITE</b></button></a></div>
             </div>
         </section>
         <section id="section3">
             <div class="title">
-                <h1 class="sch">SCHEDULE</h1>
+                <h1 class="hackfest1">SCHEDULE</h1>
                 <p><b>TimeLine Of Event</b></p>
             </div>
             <div class="timeline">
@@ -208,30 +195,14 @@
             <p class="show"><b>Show off your skills and win big!</b>
             </p>
             <div class="row">
+                
                 <div class="course-col">
-                    <img src="./assets/trophy.com" alt="trophy" class="trd">
-                    <h3 class="rd"><b>3rd Place</b></h3>
-                    <br> <b>
-                        <h2 class="seven">CASH PRICE : 7,500/Rs-
-                            +</h2>
-                        <h3 class="dayst">30days Free Course</h3>
-                    </b>
-                </div>
-                <div class="course-col">
-                    <img src="./assets/trophy.com" alt="trophy" class="ist">
-                    <h1 class="st"><b>1st Place</b></h1>
-                    <h2 class="cpst">CASH PRICE : 30,000/Rs-
-                        +</h2>
-                    <h3 class="dayst">30days Free Course</h3>
-                </div>
-                <div class="course-col">
-                    <img src="./assets/trophy.com" alt="trophy" class="twnd">
-                    <h2 class="nd"><b>2nd Place</b></h2>
-                    <br><b>
-                        <h2 class="seven">CASH PRICE : 15,000/Rs-
-                            +</h2>
-                        <h3 class="dayst">30days Free Course</h3>
-                    </b>
+                    
+                    <h1 class="st"><b>WORTH OF</b></h1>
+                    <h2 class="cpst">RS.50,000/-
+                       <br> +</h2>
+                    <h3 class="dayst">30days Free Internship</h3>
+                    <h4>With Certificate</h4>
                 </div>
             </div>
             <h1 class="PARTI">"ALL PARTICIPANT WILL RECIVE PARTICIPATED<br> CERTIFICATE"</h1>
@@ -239,13 +210,13 @@
         <h1 class="hackfest2">JURY MEMBERS</h1>
         <div class="jury-container">
             <div class="jury-member">
-                <img src="./assets/ANANDH SAMY.jpeg" alt="Jury Member 1" class="jury-photo">
+                <img src="./assets/img/ANANDH SAMY.jpeg" alt="Jury Member 1" class="jury-photo">
                 <h3 class="jury-name">ANANDH SAMY</h3>
                 <p class="jury-details">Enterprise Cyber Security Strategist | SIEM Consultant<BR> at <b>ZOHO
                         CORPORATION</b></p>
             </div>
             <div class="jury-member">
-                <img src="./assets/ASHOKKUMAR MANISEKARAN.jpeg" alt="Jury Member 2" class="jury-photo">
+                <img src="./assets/img/ASHOKKUMAR MANISEKARAN.jpeg" alt="Jury Member 2" class="jury-photo">
                 <h3 class="jury-name">ASHOKKUMAR MANISEKARAN</h3>
                 <p class="jury-details">ENTREPRENEUR | FOUNDER | DEVELOPER |TRAINER<BR>at <b>PRAYA LABS</b></p>
             </div>
@@ -262,7 +233,7 @@
         </div>
         <div class="rl">
             <ul class="accordion">
-                <h1 class="RULE">RUELS</h1><BR>
+                <h1 class="hackfest5">RUELS</h1><BR>
                 <li>
                     <input type="radio" name="accordion" id="first" radio>
                     <label for="first">
@@ -303,10 +274,10 @@
                 </li>
             </ul>
         </div>
-
+        <?php
+    include "./footer.php";
+    ?>
     </div>
-
-
     </div>
     </div>
     <div id="scrollToTop" class="scroll-icon">&#8593;</div>
@@ -314,6 +285,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+    
 </body>
-
 </html>
