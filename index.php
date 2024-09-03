@@ -7,6 +7,7 @@
     <link rel="icon" href="./assets/HACKFEST LOGO.png">
     <title>HACKFEST</title>
     <link rel="StyleSheet" href="./assets/css/style.css?<?php echo time(); ?>">
+    <link rel="stylesheet" href="./assets/css/nav-style.css">
 </head>
 
 <body>
