@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
     exit();
 }
 
-include "../connect.php";
+include "../config.php";
 include "./mail.php";
 
 function sendOTP($email, $otp) {

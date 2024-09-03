@@ -9,8 +9,8 @@ registerButton.addEventListener('mouseenter', () => {
 function createSprinkle() {
     const sprinkle = document.createElement('div');
     sprinkle.classList.add('sprinkle');
-    sprinkle.style.left = ${Math.random() * 100}px;
-    sprinkle.style.animationDuration = ${Math.random() * 1 + 0.5}s;
+    sprinkle.style.left = `${ Math.random() * 100 }px`;
+    sprinkle.style.animationDuration =`${ Math.random() * 1 + 0.5 }s`;
     document.body.appendChild(sprinkle);
 
     sprinkle.addEventListener('animationend', () => {
