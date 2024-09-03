@@ -15,11 +15,9 @@
     <?php
     include "./nav.php";
     ?>
-
     <div id="loader">
         <img src="./assets/img/logo.png" alt="Loading..." />
     </div>
-
     <div id="content" style="display: none;">
         <script src="./assets/js/loader.js"></script>
         <div id="animatedText">Explore your ideas! Register fast...</div>
@@ -32,8 +30,6 @@
             }
             setInterval(updateText, 4000); 
         </script>
-
-
         <div class="timer" id="countdown">
             <div id="days" class="flip-card">
                 <div class="flip-card-inner">
@@ -60,16 +56,12 @@
                 </div>
             </div>
         </div>
-
-
         <div class="dhms">
             <p>Days</p>
             <p>Hrs</p>
             <p>Min</p>
             <p>Sec</p>
         </div>
-
-
         <a href="register.php"><button class="button" id="register">Register</button></a>
         <script src="./css js/time.js"></script>
         <script src="./css js/button.js"></script>
@@ -80,17 +72,13 @@
         <video autoplay muted loop id="myVideo">
             <source src="./assets/video/bg.mp4" type="video/mp4">
         </video>
-
         <script src="./assets/js/time.js"></script>
-
         <a href="https://chat.whatsapp.com/BAvgvsx6lJ2CzaKIaq7dGn"><img width="50px" height="50px"
                 src="./assets/img/whatsapp logo.png" alt="" class="wha-logo"><span></span></a>
         <a href="https://ig.me/j/AbbKIpeVdKUA2nw5/">
             <img width="50px" height="50px" src="./assets/img/insta logo.png" alt=""
                 class="insta-logo"><span></span></a>
         <br>
-
-
         <section id="section1">
             <div class="home">
                 <h1 class="hackfest">HACKFEST</h1>
@@ -105,8 +93,6 @@
                     gather your team, register now, and get ready to hack, learn, and grow!"</h3>
             </div>
         </section>
-
-
         <section>
             <div class="slider">
                 <h1 class="sponser">SPONSORS</h1>
@@ -150,8 +136,7 @@
                     technology. Established in 1996, ESEC is affiliated with Anna University and approved by AICTE, New
                     Delhi. The college is recognized for its commitment to excellence in education, research, and
                     innovation."</h3>
-                <div class="vi-but"><a href="https://erode-sengunthar.ac.in/"><button class="visit-site"><b>VISIT
-                                SITE</b></button></a></div>
+                <div class="vi-but"><a href="https://erode-sengunthar.ac.in/"><button class="visit-site"><b>VISIT SITE</b></button></a></div>
             </div>
         </section>
         <section id="section3">
@@ -300,14 +285,10 @@
                 </li>
             </ul>
         </div>
-
         </div>
-
-
     </div>
     </div>
     <div id="scrollToTop" class="scroll-icon">&#8593;</div>
     <script src="./css js/scroll.js"></script>
 </body>
-
 </html>
