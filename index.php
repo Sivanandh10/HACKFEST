@@ -12,10 +12,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
-
 <body>
-<div class="cont-loader">
-    
     <div id="loader">
         <img src="./assets/img/logo.png" alt="Loading..." />
     </div>
@@ -23,13 +20,12 @@
     <?php
     include "./nav.php";
     ?>
-      
+      </div>
         <script src="./assets/js/loader.js"></script></div>
         <div id="animatedText">Explore your ideas! Register fast..!</div>
         <script>
             const textElement = document.getElementById('animatedText');
             const originalText = textElement.innerText;
-
             function updateText() {
                 textElement.innerText = originalText;
             }
@@ -68,8 +64,8 @@
             <p>Sec</p>
         </div>
         <a href="register.php"><button class="button" id="register">Register</button></a>
-        <script src=".assets/js/time.js"></script>
-        <script src=".assets/js/button.js"></script>
+        <script src="./assets/js/time.js"></script>
+        <script src="./assets/js/button.js"></script>
         <div class="glow">
             <h3>Registration Is Free</h3>
             <h4>Shortlisted Ideas Has To Pay Rs.350/perHead</h4>
@@ -108,15 +104,12 @@
                     <div class="slide">
                         <img src="./assets/img/livewire.png" alt="SPONSERSHIP">
                     </div>
-
                     <div class="slide">
                         <img src="./assets/img/livewire.png" alt="SPONSERSHIP">
                     </div>
-
                     <div class="slide">
                         <img src="./assets/img/livewire.png" alt="SPONSERSHIP">
                     </div>
-
                     <div class="slide">
                         <img src="./assets/img/livewire.png" alt="SPONSERSHIP">
                     </div>
@@ -125,7 +118,7 @@
         </section>
         <section id="section2">
             <div class="about">
-                <img src="./assets/img/about-logo.com (1).png" alt="ABOUT US" class="ab">
+                <h2 class="hackfest6">ABOUT US</h2>
             </div>
             <div class="abo-container">
                 <div class="abo-wrapper">
@@ -284,7 +277,6 @@
     <script src="./assets/js/scroll.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    
+         crossorigin="anonymous"></script>
 </body>
 </html>
