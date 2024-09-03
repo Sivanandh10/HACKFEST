@@ -104,15 +104,12 @@
                     <div class="slide">
                         <img src="./assets/img/livewire.png" alt="SPONSERSHIP">
                     </div>
-
                     <div class="slide">
                         <img src="./assets/img/livewire.png" alt="SPONSERSHIP">
                     </div>
-
                     <div class="slide">
                         <img src="./assets/img/livewire.png" alt="SPONSERSHIP">
                     </div>
-
                     <div class="slide">
                         <img src="./assets/img/livewire.png" alt="SPONSERSHIP">
                     </div>
