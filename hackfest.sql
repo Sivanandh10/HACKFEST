@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2024 at 05:58 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Sep 03, 2024 at 08:03 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Database: `hackfest`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `ID` int(11) NOT NULL,
+  `NAME` varchar(255) NOT NULL,
+  `EMAIL` varchar(255) NOT NULL,
+  `PASSWORD` varchar(255) NOT NULL,
+  `OTP` int(11) DEFAULT NULL,
+  `ROLE` varchar(255) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`ID`, `NAME`, `EMAIL`, `PASSWORD`, `OTP`, `ROLE`, `created_at`) VALUES
+(1, 'HackFest', 'jp008882@gmail.com', '$2y$12$HUH4kehlEWIFRyUTGYb4IuOX7UAzsbNIX7aet4YPoIvSqO.UAdBP6', 0, 'ADMIN', '2024-09-03 21:16:49');
 
 -- --------------------------------------------------------
 
@@ -45,7 +68,35 @@ INSERT INTO `otp` (`ID`, `EMAIL`, `OTP`, `created_at`) VALUES
 (4, 'jp008882@gmail.com', 500690, '2024-09-03 14:59:13'),
 (5, 'jp008882@gmail.com', 500690, '2024-09-03 15:01:24'),
 (6, 'jp008882@gmail.com', 639977, '2024-09-03 15:10:05'),
-(7, 'jp008882@gmail.com', 276391, '2024-09-03 15:11:03');
+(7, 'jp008882@gmail.com', 276391, '2024-09-03 15:11:03'),
+(8, 'jp008882@gmail.com', 741548, '2024-09-03 21:52:10'),
+(9, 'jp008882@gmail.com', 680575, '2024-09-03 21:54:04'),
+(10, 'jp008882@gmail.com', 223461, '2024-09-03 21:58:28'),
+(11, 'jp008882@gmail.com', 468054, '2024-09-03 21:59:44'),
+(12, 'jp008882@gmail.com', 483365, '2024-09-03 22:02:50'),
+(13, 'jp008882@gmail.com', 362722, '2024-09-03 22:03:52'),
+(14, 'jp008882@gmail.com', 231829, '2024-09-03 22:06:37'),
+(15, 'jp008882@gmail.com', 771999, '2024-09-03 22:07:27'),
+(16, 'jp008882@gmail.com', 405180, '2024-09-03 22:30:31'),
+(17, 'jp008882@gmail.com', 593385, '2024-09-03 22:33:00'),
+(18, 'jp008882@gmail.com', 819463, '2024-09-03 22:34:21'),
+(19, 'jp008882@gmail.com', 298940, '2024-09-03 22:40:12');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `ID` int(11) NOT NULL,
+  `UID` varchar(255) NOT NULL,
+  `TRANSACTION_ID` varchar(255) NOT NULL,
+  `PAYMENT_DATE` date NOT NULL,
+  `SCREENSHOT` varchar(255) NOT NULL,
+  `STATUS` varchar(255) NOT NULL DEFAULT 'NOT VERIFIED',
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -66,6 +117,13 @@ CREATE TABLE `registration` (
   `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `registration`
+--
+
+INSERT INTO `registration` (`ID`, `NAME`, `EMAIL`, `MOBILE`, `YEAR`, `DEPARTMENT`, `COLLEGE`, `GENDER`, `T_ID`, `created_at`) VALUES
+(1, 'Jayaprakash E K', 'jp008882@gmail.com', '9025019506', 'IV', 'CSE', 'ESEC', 'MALE', 'HF001', '2024-09-03 22:42:53');
+
 -- --------------------------------------------------------
 
 --
@@ -76,17 +134,37 @@ CREATE TABLE `teams` (
   `ID` int(11) NOT NULL,
   `T_ID` varchar(255) NOT NULL,
   `TITLE` text NOT NULL,
-  `created_at` datetime NOT NULL
+  `STATUS` varchar(255) NOT NULL DEFAULT 'UPLOADED',
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `teams`
+--
+
+INSERT INTO `teams` (`ID`, `T_ID`, `TITLE`, `STATUS`, `created_at`) VALUES
+(1, 'HF001', 'Sample', 'UPLOADED', '0000-00-00 00:00:00');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `otp`
 --
 ALTER TABLE `otp`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -106,22 +184,34 @@ ALTER TABLE `teams`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `otp`
 --
 ALTER TABLE `otp`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
