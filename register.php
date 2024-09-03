@@ -10,7 +10,6 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <link rel="stylesheet"href="./assets/css/nav-style.css">
 </head>
 
 <body>
@@ -25,12 +24,12 @@
                 <input type="text" name="teamname" id="team-name" placeholder="Enter your team name"
                     class="form-control" required>
             </div>
+
         </form>
     </div>
 
     <script>
-
-        $("#team-name").on("keyup", function () {
+        $("#team-name").on("keyup", function() {
             $.ajax({
                 url: './backend/register.php',
                 method: 'post',
@@ -38,16 +37,15 @@
                     op: 'check',
                     team_name: $(this).val(),
                 },
-                success: function (data) {
+                success: function(data) {
                     data = JSON.parse(data);
 
                     if (data.status == 'success') {
-                        var message = ``;
+                        var message = `<div class="card text-bg-danger mb-3" style="max-width: 18rem;"><div class="card-body"><h5 class="card-title">Danger card title</h5><p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p></div></div>`;
                     }
                 }
             })
         })
-
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
