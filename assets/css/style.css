@@ -1002,13 +1002,7 @@ padding: 10px 10px 20px;
 .accordion input[type="radio"]:checked + label::before{
     content: '[-]';
     }
-.navi{
-    margin: 0em auto ;
-    max-width: 98.15em;
-    display: flex;
-    justify-content: last baseline;
 
-}
 .footer {
     background-color: #333;
     color: white;
@@ -1174,23 +1168,7 @@ body {
         padding-left: -60px; 
         margin-top: 25px;
     }
-    nav {
-      align-items: center;
-      max-width: 768px;
-      margin-top: -30px;
-      margin-left: -40px;
 
-    }
-    nav a {
-      font-size: 10px;
-      margin-right: -35px;
-      margin-left: 55px;
-      padding: 10px 0px;
-      margin-top: -80px;
-      margin-bottom: -100px;
-      justify-content: space-evenly;
-
-    }
     
     .logo{
          margin-right: -50px;
