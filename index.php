@@ -4,28 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="./assets/HACKFEST LOGO.png">
-    <title>HACKFEST</title>
+    <link rel="icon" href="./assets/img/logo.png">
+    <title>HACKFEST - An National Level Hackathon | Erode Sengunthar Engineering College</title>
     <link rel="StyleSheet" href="./assets/css/style.css?<?php echo time(); ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <div id="loader">
-        <img src="./assets/img/logo.png" alt="Loading..." />
-    </div>
-    <div id="content" style="display: none;">
+
+    <?php include "./loader.php"; ?>
+
     <?php
     include "./nav.php";
     ?>
-      </div>
-        <script src="./assets/js/loader.js"></script></div>
+    <div id="content">
         <div id="animatedText">Explore your ideas! Register fast..!</div>
         <script>
             const textElement = document.getElementById('animatedText');
             const originalText = textElement.innerText;
+
             function updateText() {
                 textElement.innerText = originalText;
             }
@@ -56,12 +56,12 @@
                     <div class="flip-card-back">00</div>
                 </div>
             </div>
-        </div>
-        <div class="dhms">
-            <p>Days</p>
-            <p>Hrs</p>
-            <p>Min</p>
-            <p>Sec</p>
+            <div class="dhms">
+                <p>Days</p>
+                <p>Hrs</p>
+                <p>Min</p>
+                <p>Sec</p>
+            </div>
         </div>
         <a href="register.php"><button class="button" id="register">Register</button></a>
         <script src="./assets/js/time.js"></script>
@@ -188,12 +188,13 @@
             <p class="show"><b>Show off your skills and win big!</b>
             </p>
             <div class="row">
-                
+
                 <div class="course-col">
-                    
+
                     <h1 class="st"><b>WORTH OF</b></h1>
                     <h2 class="cpst">RS.50,000/-
-                       <br> +</h2>
+                        <br> +
+                    </h2>
                     <h3 class="dayst">30days Free Internship</h3>
                     <h4>With Certificate</h4>
                 </div>
@@ -268,8 +269,8 @@
             </ul>
         </div>
         <?php
-    include "./footer.php";
-    ?>
+        include "./footer.php";
+        ?>
     </div>
     </div>
     </div>
@@ -277,6 +278,7 @@
     <script src="./assets/js/scroll.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-         crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
 </body>
+
 </html>

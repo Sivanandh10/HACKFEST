@@ -1,9 +1,10 @@
 <?php
 
-include "../connect.php";
+include "../config.php";
 
-function generateHackfestID($conn) {
-    $sql = "SELECT * FROM team";
+function generateHackfestID($conn)
+{
+    $sql = "SELECT * FROM teams";
     $result = mysqli_query($conn, $sql);
     $resultCheck = mysqli_num_rows($result);
 
@@ -13,7 +14,7 @@ function generateHackfestID($conn) {
 }
 
 if (isset($_POST['register'])) {
-    if (!isset($_POST['tl-name']) || !isset($_POST['tl-email']) || !isset($_POST['tl-phone']) || !isset($_POST['tl-gender']) || !isset($_POST['tl-dept']) || !isset($_POST['tl-year']) || !isset($_POST['college']) || !isset($_POST['t_title']) || !isset($_POST['abstract-file'])) {
+    if (!isset($_POST['tl-name']) || !isset($_POST['tl-email']) || !isset($_POST['tl-phone']) || !isset($_POST['tl-gender']) || !isset($_POST['tl-dept']) || !isset($_POST['tl-year']) || !isset($_POST['college']) || !isset($_POST['t_title']) || !isset($_FILES['abstract-file'])) {
         header("Location: ../register.php?error=emptyfields");
     }
 
@@ -33,7 +34,7 @@ if (isset($_POST['register'])) {
     $tm_gender = [];
     $tm_dept = [];
     $tm_year = [];
-    
+
     for ($i = 0; $i <= 2; $i++) {
         if (isset($_POST['tm-name-' . $i]) && isset($_POST['tm-phone-' . $i]) && isset($_POST['tm-gender-' . $i]) && isset($_POST['tm-dept-' . $i]) && isset($_POST['tm-year-' . $i])) {
             $tm_name[$i] = $_POST['tm-name-' . $i];
@@ -51,7 +52,6 @@ if (isset($_POST['register'])) {
         $abstract_file_name = $abstract_file['name'];
         $abstract_file_tmp_name = $abstract_file['tmp_name'];
         $abstract_file_size = $abstract_file['size'];
-        $abstract_file_error = $abstract_file['error'];
         $abstract_file_type = $abstract_file['type'];
 
         $abstract_file_ext = explode('.', $abstract_file_name);
@@ -59,36 +59,56 @@ if (isset($_POST['register'])) {
 
         $allowed = ['pdf'];
 
+        $hackfestID = generateHackfestID($conn);
         if (in_array($abstract_file_actual_ext, $allowed)) {
-            if ($abstract_file_error === 0) {
-                if ($abstract_file_size < 1000000) {
-                    $abstract_file_name_new = uniqid('', true) . "." . $abstract_file_actual_ext;
+            if ($abstract_file_size < 5000000) {
+
+                try {
+                    $abstract_file_name_new = $hackfestID . "." . $abstract_file_actual_ext;
 
                     if (!file_exists('../assets/uploads')) {
                         mkdir('../assets/uploads', 0777, true);
                     }
 
                     $abstract_file_destination = '../assets/uploads' . $abstract_file_name_new;
+
+                    if (file_exists($abstract_file_destination)) {
+                        unlink($abstract_file_destination);
+                    }
+
                     move_uploaded_file($abstract_file_tmp_name, $abstract_file_destination);
-                } else {
-                    header("Location: ../register.php?error=abstractfiletoolarge");
+                } catch (Exception $e) {
+                    header("Location: ../register.php?error=uploadFailed");
                 }
             } else {
-                header("Location: ../register.php?error=abstractfileerror");
+                header("Location: ../register.php?error=tooLarge");
             }
         } else {
-            header("Location: ../register.php?error=abstractfileinvalid");
+            header("Location: ../register.php?error=invalidFile");
         }
     } else {
-        header("Location: ../register.php?error=abstractfileerror");
+        header("Location: ../register.php?error=somethingWentWrong");
     }
 
-    $hackfestID = generateHackfestID($conn);
 
-    $sql = "INSERT INTO team (T_ID, TITLE ) VALUES ('$hackfestID', '$t_title')";
-    mysqli_query($conn, $sql);
+    $sql = "INSERT INTO teams (T_ID, TITLE ) VALUES ('$hackfestID', '$t_title')";
+    if (mysqli_query($conn, $sql)) {
+        $sql = "INSERT INTO registration ( NAME, EMAIL, MOBILE, YEAR, DEPARTMENT, COLLEGE, GENDER, T_ID ) VALUES ('$tl_name', '$tl_email', '$tl_phone', '$tl_year', '$tl_dept', '$college', '$tl_gender', '$hackfestID')";
+        if (mysqli_query($conn, $sql)) {
 
-    $sql = "INSERT INTO registration
+            for ($i = 0; $i <= count($tm_name); $i++) {
+                $sql = "INSERT INTO registration ( NAME, EMAIL, MOBILE, YEAR, DEPARTMENT, COLLEGE, GENDER, T_ID ) VALUES ('$tm_name[$i]', '$tl_email', '$tm_phone[$i]', '$tm_year[$i]', '$tm_dept[$i]', '$college', '$tm_gender[$i]', '$hackfestID')";
+
+                if (!mysqli_query($conn, $sql)) {
+                    header("Location: ../register.php?error=sqlerror");
+                }
+            }
+
+            header("Location: ../register.php?success=registered");
+        } else {
+            header("Location: ../register.php?error=sqlerror");
+        }
+    } else {
+        header("Location: ../register.php?error=sqlerror");
+    }
 }
-
-?>

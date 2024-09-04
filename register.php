@@ -12,10 +12,12 @@
 
 <body>
 
+    <?php include "./loader.php"; ?>
+
     <?php include "./nav.php"; ?>
 
     <div class="container d-flex justify-content-center my-3">
-        <form action="./backend/register.php" method="post" class="bg-white" style="width: min(500px, 90%);">
+        <form action="./backend/register.php" class="bg-white" style="width: min(500px, 90%);"  method="POST" enctype="multipart/form-data">
             <h2>Registration</h2>
             <div class="mb-3">
                 <label for="tl-name" class="form-label">Team Leader Name</label>
@@ -143,6 +145,10 @@
         function sendOTP() {
             var email = $("#tl-email").val();
             if (email) {
+
+                // Show Loader
+                showLoader();
+
                 $.ajax({
                     url: "./backend/send-otp.php",
                     type: "POST",
@@ -173,6 +179,9 @@
                         } else {
                             alert("Failed to send OTP");
                         }
+
+                        // Hide Loader
+                        hideLoader();
                     }
                 });
             } else {
@@ -183,6 +192,10 @@
         function resendOTP() {
             var email = $("#tl-email").val();
             if (email) {
+
+                // Show Loader
+                showLoader();
+
                 $.ajax({
                     url: "./backend/send-otp.php",
                     type: "POST",
@@ -201,6 +214,10 @@
             } else {
                 alert("Enter Email to verify");
             }
+
+            // Hide Loader
+            hideLoader();
+
         }
 
         // Verify OTP
@@ -208,6 +225,10 @@
             var otp = $("#otp").val();
             var email = $("#tl-email").val();
             if (otp) {
+
+                // Show Loader
+                showLoader();
+
                 $.ajax({
                     url: "./backend/send-otp.php",
                     type: "POST",
@@ -233,6 +254,9 @@
                         } else {
                             alert("Failed to verify OTP");
                         }
+
+                        // Hide Loader
+                        hideLoader();
                     }
                 });
             } else {
