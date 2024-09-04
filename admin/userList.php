@@ -39,15 +39,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                 <table>
                     <tr>
                         <th>S.NO</th>
-                        <th>User ID</th>
+                        <th>Team ID</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Paper</th>
                         <th>Action</th>
                     </tr>
                     <?php
-                    $sql = "SELECT * FROM users";
+                    $sql = "SELECT * FROM registration ORDER BY T_ID";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         $i = 1;
@@ -55,26 +54,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                     ?>
                             <tr>
                                 <td><?php echo $i; ?></td>
-                                <td><?php echo $row['UID']; ?></td>
+                                <td><?php echo $row['T_ID']; ?></td>
                                 <td><?php echo $row['NAME']; ?></td>
                                 <td><?php echo $row['EMAIL']; ?></td>
-                                <td><?php echo $row['PHONE']; ?></td>
-                                <td>
-                                    <?php
-                                    $sql1 = "SELECT * FROM papers WHERE UID='{$row['UID']}'";
-                                    $result1 = $conn->query($sql1);
-                                    if ($result1->num_rows > 0) {
-                                        while ($row1 = $result1->fetch_assoc()) {
-                                            echo $row1['PAPER_TITLE'];
-                                        }
-                                    } else {
-                                        echo "No Paper Submitted";
-                                    }
-                                    ?>
-                                </td>
+                                <td><?php echo $row['MOBILE']; ?></td>
                                 <td>
                                     <!-- View User Details -->
-                                    <button onclick="fetchUser('<?php echo $row['UID']; ?>')">
+                                    <button onclick="fetchUser('<?php echo $row['ID']; ?>')">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
                                 </td>
@@ -107,7 +93,18 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                             return;
                         }
 
-                        data = data.data;
+                        var teamMembers = "";
+                        if (data.user.teamMembers.length > 0) {
+                            teamMembers = "<div class='content-row'><h3>Team Members</h3><ul>";
+                            data.user.teamMembers.forEach(member => {
+                                teamMembers += `<li>
+                                        ${member.NAME} - ${member.EMAIL} &nbsp;
+                                        <button onclick="fetchUser('${member.ID}')"><i class="fa-solid fa-eye"></i></button>
+                                    </li>`;
+                            });
+                            teamMembers += "</ul></div>";
+                        }
+
                         //data  JSON format to HTML
                         var user = `
                                 <div class="modal-content">
@@ -120,8 +117,16 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                                     <div class="modal-body">
                                         <div class="user-details">
                                             <div class="content-row">
+                                                <h3>Team ID</h3>
+                                                <p>${data.user.T_ID}</p>
+                                            </div>
+                                            <div class="content-row">
                                                 <h3>Name</h3>
                                                 <p>${data.user.NAME}</p>
+                                            </div>
+                                            <div class="content-row">
+                                                <h3>Gender</h3>
+                                                <p>${data.user.GENDER}</p>
                                             </div>
                                             <div class="content-row">
                                                 <h3>Email</h3>
@@ -129,30 +134,29 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                                             </div>
                                             <div class="content-row">
                                                 <h3>Phone</h3>
-                                                <p>${data.user.PHONE}</p>
+                                                <p>${data.user.MOBILE}</p>
                                             </div>
                                             <div class="content-row">
-                                                <h3>Designation</h3>
-                                                <p>${data.user.DESIGNATION}</p>
+                                                <h3>Branch</h3>
+                                                <p>${ data.user.YEAR + " - " + data.user.DEPARTMENT}</p>
                                             </div>
                                             <div class="content-row">
-                                                <h3>Organisation</h3>
-                                                <p>${data.user.ORGANISATION}</p>
+                                                <h3>College</h3>
+                                                <p>${data.user.COLLEGE}</p>
                                             </div>
                                             <div class="content-row">
-                                                <h3>Address</h3>
-                                                <p>${data.user.ADDRESS}</p>
+                                                <h3>Team Title</h3>
+                                                <p>${data.user.team.TITLE}</p>
                                             </div>
                                             <div class="content-row">
-                                                <h3>Paper Title</h3>
-                                                <p>${data.paper.PAPER_TITLE}</p>
-                                                <a href=".${data.paper.FILE_PATH}" download>
-                                                    <button>
-                                                        <i class="fa-solid fa-download"></i>
-                                                        Download
-                                                    </button>
-                                                </a>
+                                                <h3>Status</h3>
+                                                <p>${data.user.team.STATUS}</p>
                                             </div>
+                                            <div class="content-row">
+                                                <h3>Abstract</h3>
+                                                <p><a href="../assets/uploads/${data.user.T_ID}.pdf" target="_blank">View</a></p>
+                                            </div>
+                                            ${teamMembers}
                                         </div>
                                     </div>
                                     `;

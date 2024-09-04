@@ -13,7 +13,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Papers List | HACKFEST - 24</title>
+        <title>Teams List | HACKFEST - 24</title>
         <?php include "./includes.php"; ?>
     </head>
 
@@ -23,10 +23,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
 
         <?php include "./header.php"; ?>
 
-        <!-- Papers -->
+        <!-- Teams -->
         <div class="container">
             <div class="header">
-                <h2>Paper List</h2>
+                <h2>Team List</h2>
             </div>
 
             <!-- Search Field -->
@@ -50,45 +50,45 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                     <tr>
                         <th>S.NO</th>
                         <th>Participant ID</th>
-                        <th>Paper Title</th>
+                        <th>Team Title</th>
                         <th>Status</th>
                         <th>Send Mail</th>
                         <th>Action</th>
                     </tr>
                     <?php
-                    $sql = "SELECT * FROM papers";
-                    $result = $conn->query($sql);
+                    $sql = "SELECT * FROM teams";
+                    $result = mysqli_query($conn, $sql);
                     if ($result->num_rows > 0) {
                         $i = 1;
                         while ($row = $result->fetch_assoc()) {
                     ?>
-                            <tr id="row-<?php echo $row['UID']; ?>">
+                            <tr id="row-<?php echo $row['T_ID']; ?>">
                                 <td><?php echo $i; ?></td>
-                                <td><?php echo $row['UID']; ?></td>
-                                <td><?php echo $row['PAPER_TITLE']; ?></td>
+                                <td><?php echo $row['T_ID']; ?></td>
+                                <td><?php echo $row['TITLE']; ?></td>
 
                                 <td style="font-weight: 700;">
                                     <?php echo $row['STATUS']; ?>
                                 </td>
                                 <td>
-                                    <button title="Send mail" onclick="paperOperation( 'send mail', '<?php echo $row['UID']; ?>')" style="background-color: var(--success);">
+                                    <button title="Send mail" onclick="teamOperation( 'send mail', '<?php echo $row['T_ID']; ?>')" style="background-color: var(--success);">
                                         Send Mail
                                     </button>
                                 </td>
                                 <td>
-                                    <button title="View" onclick="openFile('<?php echo $row['FILE_PATH']; ?>', '<?php echo $row['UID']; ?>')">
+                                    <button title="View" onclick="openFile('../assets/uploads/<?php echo $row['T_ID']; ?>.pdf', '<?php echo $row['T_ID']; ?>')">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
-                                    <button title="Download" onclick="paperOperation( 'download', '<?php echo $row['UID']; ?>')">
+                                    <button title="Download" onclick="teamOperation( 'download', '<?php echo $row['T_ID']; ?>')">
                                         <i class="fa-solid fa-download"></i>
                                     </button>
-                                    <button title="Select" onclick="paperOperation( 'select', '<?php echo $row['UID']; ?>')">
+                                    <button title="Select" onclick="teamOperation( 'select', '<?php echo $row['T_ID']; ?>')">
                                         <i class="fa-solid fa-check"></i>
                                     </button>
-                                    <button title="Reject" onclick="paperOperation( 'reject', '<?php echo $row['UID']; ?>')">
+                                    <button title="Reject" onclick="teamOperation( 'reject', '<?php echo $row['T_ID']; ?>')">
                                         <i class="fa fa-ban"></i>
                                     </button>
-                                    <button title="Delete" onclick="paperOperation( 'delete', '<?php echo $row['UID']; ?>')">
+                                    <button title="Delete" onclick="teamOperation( 'delete', '<?php echo $row['T_ID']; ?>')">
                                         <i class="fa-solid fa-trash"></i>
                                     </button>
                                 </td>
@@ -99,7 +99,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                     } else {
                         ?>
                         <tr>
-                            <td colspan="6">No Papers Found</td>
+                            <td colspan="6">No Teams Found</td>
                         </tr>
                     <?php
                     }
@@ -137,28 +137,20 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                 }
             });
 
-            function openFile(filePath, uid) {
+            function openFile(filePath, t_id) {
                 var fileType = filePath.split('.').pop().toLowerCase();
-
-                if (fileType == 'pdf') {
-                    filePath = filePath.replace('./', '../');
-                } else if (fileType == 'doc' || fileType == 'docx') {
-                    filePath = filePath.replace('./', window.location.origin + '/hackfest/');
-
-                    filePath = 'https://docs.google.com/gview?url=' + filePath + '&embedded=true';
-                }
 
                 $(".fileViewerContainer").css('display', 'flex');
                 $("#fileViewer").attr('src', filePath);
 
-                paperOperation('view', uid);
+                teamOperation('view', t_id);
             }
 
-            function paperOperation(operation, uid) {
+            function teamOperation(operation, t_id) {
                 if (operation == 'view')
                     var confirmation = true;
                 else
-                    var confirmation = confirm("Are you sure you want to " + operation + " this paper?");
+                    var confirmation = confirm("Are you sure you want to " + operation + " this team?");
 
                 if (confirmation) {
                     $.ajax({
@@ -166,7 +158,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                         url: "./papersOperation.php",
                         data: {
                             operation: operation,
-                            uid: uid,
+                            t_id: t_id,
                             performOperation: 1
                         },
                         success: function(response) {
@@ -180,14 +172,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                                     filePath = response.file;
                                     filePath.replace('./', '../')
 
-                                    $("body").append(`<a href='${filePath}' download='paper_${uid}' id='dn_${uid}' style='visibility: hidden'></a>`);
+                                    $("body").append(`<a href='${filePath}' download='team_${t_id}' id='dn_${t_id}' style='visibility: hidden'></a>`);
 
-                                    $(`#dn_${uid}`)[0].click();
-                                    $(`#dn_${uid}`).remove();
+                                    $(`#dn_${t_id}`)[0].click();
+                                    $(`#dn_${t_id}`).remove();
                                 }
 
                                 if (operation == 'delete') {
-                                    $(`#row-${uid}`).remove();
+                                    $(`#row-${t_id}`).remove();
                                 }
 
                             } else {

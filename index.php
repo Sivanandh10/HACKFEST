@@ -56,6 +56,8 @@
                     <div class="flip-card-back">00</div>
                 </div>
             </div>
+        </div>
+        <div>
             <div class="dhms">
                 <p>Days</p>
                 <p>Hrs</p>

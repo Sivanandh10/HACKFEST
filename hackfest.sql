@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2024 at 08:03 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Sep 04, 2024 at 12:42 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`ID`, `NAME`, `EMAIL`, `PASSWORD`, `OTP`, `ROLE`, `created_at`) VALUES
-(1, 'HackFest', 'jp008882@gmail.com', '$2y$12$HUH4kehlEWIFRyUTGYb4IuOX7UAzsbNIX7aet4YPoIvSqO.UAdBP6', 0, 'ADMIN', '2024-09-03 21:16:49');
+(1, 'HackFest', 'hackfest@esec.ac.in', '$2y$12$HUH4kehlEWIFRyUTGYb4IuOX7UAzsbNIX7aet4YPoIvSqO.UAdBP6', 0, 'ADMIN', '2024-09-03 21:16:49');
 
 -- --------------------------------------------------------
 
@@ -80,7 +80,15 @@ INSERT INTO `otp` (`ID`, `EMAIL`, `OTP`, `created_at`) VALUES
 (16, 'jp008882@gmail.com', 405180, '2024-09-03 22:30:31'),
 (17, 'jp008882@gmail.com', 593385, '2024-09-03 22:33:00'),
 (18, 'jp008882@gmail.com', 819463, '2024-09-03 22:34:21'),
-(19, 'jp008882@gmail.com', 298940, '2024-09-03 22:40:12');
+(19, 'jp008882@gmail.com', 298940, '2024-09-03 22:40:12'),
+(20, 'sivanandh10cc@gmail.com', 387385, '2024-09-04 14:23:18'),
+(21, 'sivanandh10cc@gmail.com', 596016, '2024-09-04 14:23:31'),
+(22, 'sivanandh10cc@gmail.com', 329354, '2024-09-04 14:24:19'),
+(23, 'sivanandh10cc@gmail.com', 905815, '2024-09-04 14:24:39'),
+(24, 'sivanandh10cc@gmail.com', 567786, '2024-09-04 14:25:02'),
+(25, 'sivanandh10cc@gmail.com', 745644, '2024-09-04 14:25:25'),
+(26, 'sivanandh10cc@gmail.com', 304170, '2024-09-04 14:44:54'),
+(27, 'sivanandh10cc@gmail.com', 225364, '2024-09-04 14:48:20');
 
 -- --------------------------------------------------------
 
@@ -122,7 +130,13 @@ CREATE TABLE `registration` (
 --
 
 INSERT INTO `registration` (`ID`, `NAME`, `EMAIL`, `MOBILE`, `YEAR`, `DEPARTMENT`, `COLLEGE`, `GENDER`, `T_ID`, `created_at`) VALUES
-(1, 'Jayaprakash E K', 'jp008882@gmail.com', '9025019506', 'IV', 'CSE', 'ESEC', 'MALE', 'HF001', '2024-09-03 22:42:53');
+(1, 'Jayaprakash E K', 'jp008882@gmail.com', '9025019506', 'IV', 'CSE', 'ESEC', 'MALE', 'HF001', '2024-09-03 22:42:53'),
+(3, 'KANNAN M', 'kannanmuruganandham1@gmail.com', '6382511495', 'IV', 'CSE', 'ESEC', 'MALE', 'HF001', '2024-09-03 22:42:53'),
+(4, 'HARIHARAN K', 'haripsp2004@gmail.com', '9080083526', 'IV', 'CSE', 'ESEC', 'MALE', 'HF001', '2024-09-03 22:42:53'),
+(5, 'siva', 'sivanandh10cc@gmail.com', '9342446559', 'III', 'CSE', 'Panimalar engineering college', 'MALE', 'HF002', '2024-09-04 14:45:24'),
+(6, '', 'sivanandh10cc@gmail.com', '', '', '', 'Panimalar engineering college', '', 'HF002', '2024-09-04 14:45:24'),
+(7, 'siva', 'sivanandh10cc@gmail.com', '9342446559', 'II', 'CSE', 'Panimalar engineering college', 'MALE', 'HF002', '2024-09-04 14:49:03'),
+(8, '', 'sivanandh10cc@gmail.com', '', '', '', 'Panimalar engineering college', '', 'HF002', '2024-09-04 14:49:03');
 
 -- --------------------------------------------------------
 
@@ -143,7 +157,8 @@ CREATE TABLE `teams` (
 --
 
 INSERT INTO `teams` (`ID`, `T_ID`, `TITLE`, `STATUS`, `created_at`) VALUES
-(1, 'HF001', 'Sample', 'UPLOADED', '0000-00-00 00:00:00');
+(1, 'HF001', 'Sample', 'ACCEPTED', '0000-00-00 00:00:00'),
+(3, 'HF002', 'IOT', 'UNDER REVIEW', '2024-09-04 14:49:03');
 
 --
 -- Indexes for dumped tables
@@ -193,7 +208,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `otp`
 --
 ALTER TABLE `otp`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `payment`
@@ -205,13 +220,13 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

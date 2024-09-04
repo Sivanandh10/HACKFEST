@@ -35,6 +35,13 @@ if (isset($_POST['register'])) {
     $tm_dept = [];
     $tm_year = [];
 
+    // Check if mail already exists
+    $sql = "SELECT * FROM registration WHERE EMAIL='$tl_email'";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        header("Location: ../register.php?error=mailExists");
+    }
+
     for ($i = 0; $i <= 2; $i++) {
         if (isset($_POST['tm-name-' . $i]) && isset($_POST['tm-phone-' . $i]) && isset($_POST['tm-gender-' . $i]) && isset($_POST['tm-dept-' . $i]) && isset($_POST['tm-year-' . $i])) {
             $tm_name[$i] = $_POST['tm-name-' . $i];
@@ -70,7 +77,7 @@ if (isset($_POST['register'])) {
                         mkdir('../assets/uploads', 0777, true);
                     }
 
-                    $abstract_file_destination = '../assets/uploads' . $abstract_file_name_new;
+                    $abstract_file_destination = '../assets/uploads/' . $abstract_file_name_new;
 
                     if (file_exists($abstract_file_destination)) {
                         unlink($abstract_file_destination);

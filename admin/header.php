@@ -21,19 +21,19 @@
             </li>
             <li class="userList">
                 <a href="./userList.php">
-                    <i class="fa fa-users" aria-hidden="true" title="Dashboard"></i>
+                    <i class="fa fa-users" aria-hidden="true" title="Participants"></i>
                     <span>Participants</span>
                 </a>
             </li>
             <li class="papersList">
                 <a href="./papersList.php">
-                    <i class="fa fa-file-powerpoint" aria-hidden="true" title="Dashboard"></i>
-                    <span>Papers</span>
+                    <i class="fa fa-file-powerpoint" aria-hidden="true" title="Teams"></i>
+                    <span>Teams</span>
                 </a>
             </li>
             <li class="paymentList">
                 <a href="./paymentList.php">
-                    <i class="fa fa-file-invoice" aria-hidden="true" title="Dashboard"></i>
+                    <i class="fa fa-file-invoice" aria-hidden="true" title="Payments"></i>
                     <span>Payments</span>
                 </a>
             </li>
