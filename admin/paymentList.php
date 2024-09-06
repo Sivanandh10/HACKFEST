@@ -56,7 +56,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                         <th>Action</th>
                     </tr>
                     <?php
-                    $sql = "SELECT * FROM users JOIN payment ON users.UID = payment.UID";
+                    $sql = "SELECT * FROM teams JOIN payment ON teams.T_ID = payment.T_ID";
                     $result = $conn->query($sql);
                     if ($result->num_rows > 0) {
                         $i = 1;

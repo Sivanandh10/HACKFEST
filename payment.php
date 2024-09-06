@@ -3,7 +3,7 @@ include './config.php';
 
 // Upload Payment Details to the Database
 if (isset($_POST['payment'])) {
-    $userid = $_POST['userid'];
+    $teamID = $_POST['teamID'];
     $paymentDate = $_POST['payment-date'];
     $transactionId = $_POST['transaction-id'];
     $paymentScreenshot = $_FILES['payment-screenshot'];
@@ -17,23 +17,24 @@ if (isset($_POST['payment'])) {
     $allowed = array('jpg', 'jpeg', 'png', 'pdf');
 
     // Check if the user has already registered
-    $sql = "SELECT * FROM users WHERE UID = '$userid'";
+    $sql = "SELECT * FROM teams WHERE T_ID = '$teamID'";
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
 
         // Check if the user has already uploaded the payment details
-        $sql = "SELECT * FROM payment WHERE UID='$userid'";
+        $sql = "SELECT * FROM payment WHERE T_ID='$teamID'";
         $result = mysqli_query($conn, $sql);
         if (mysqli_num_rows($result) > 0) {
             header("Location: ./paymentScreenshot.php?error=AreadyUploaded");
             exit();
         }
 
+        if (!file)
 
-        $paymentScreenshotNameNew = $userid . "." . $paymentScreenshotActualExt;
+        $paymentScreenshotNameNew = $teamID . "." . $paymentScreenshotActualExt;
         $paymentScreenshotDestination = './uploads/payments/' . $paymentScreenshotNameNew;
 
-        $sql = "INSERT INTO payment ( UID, PAYMENT_DATE, TRANSACTION_ID, SCREENSHOT) VALUES ('$userid', '$paymentDate', '$transactionId', '$paymentScreenshotDestination')";
+        $sql = "INSERT INTO payment ( UID, PAYMENT_DATE, TRANSACTION_ID, SCREENSHOT) VALUES ('$teamID', '$paymentDate', '$transactionId', '$paymentScreenshotDestination')";
         $result = mysqli_query($conn, $sql);
         if ($result) {
             move_uploaded_file($paymentScreenshotTmpName, $paymentScreenshotDestination);
@@ -42,7 +43,7 @@ if (isset($_POST['payment'])) {
             header("Location: ./paymentScreenshot.php?error=uploaderror");
         }
     } else {
-        header("Location: ./paymentScreenshot.php?error=notregistered");
+        header("Location: ./paymentScreenshot.php?error=invalidTeamID");
     }
 } else {
     header("Location: ./paymentScreenshot.php?error=InvalidRequest");
