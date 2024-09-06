@@ -29,12 +29,15 @@ if (isset($_POST['payment'])) {
             exit();
         }
 
-        if (!file)
+        // Check if folder available
+        if (!file_exists('./assets/payments')) {
+            mkdir('./assets/payments', 0777, true);
+        }
 
         $paymentScreenshotNameNew = $teamID . "." . $paymentScreenshotActualExt;
         $paymentScreenshotDestination = './uploads/payments/' . $paymentScreenshotNameNew;
 
-        $sql = "INSERT INTO payment ( UID, PAYMENT_DATE, TRANSACTION_ID, SCREENSHOT) VALUES ('$teamID', '$paymentDate', '$transactionId', '$paymentScreenshotDestination')";
+        $sql = "INSERT INTO payment ( T_ID, PAYMENT_DATE, TRANSACTION_ID, SCREENSHOT) VALUES ('$teamID', '$paymentDate', '$transactionId', '$paymentScreenshotDestination')";
         $result = mysqli_query($conn, $sql);
         if ($result) {
             move_uploaded_file($paymentScreenshotTmpName, $paymentScreenshotDestination);

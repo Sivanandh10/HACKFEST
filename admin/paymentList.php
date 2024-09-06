@@ -47,8 +47,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                 <table>
                     <tr>
                         <th>S.NO</th>
-                        <th>User ID</th>
-                        <th>Name</th>
+                        <th>Team ID</th>
                         <th>Payment Date</th>
                         <th>Transaction ID</th>
                         <th>STATUS</th>
@@ -61,11 +60,10 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                     if ($result->num_rows > 0) {
                         $i = 1;
                         while ($row = $result->fetch_assoc()) {
-                        ?>
-                            <tr id="row-<?php echo $row['UID']; ?>">
+                    ?>
+                            <tr id="row-<?php echo $row['T_ID']; ?>">
                                 <td><?php echo $i; ?></td>
-                                <td><?php echo $row['UID']; ?></td>
-                                <td><?php echo $row['NAME']; ?></td>
+                                <td><?php echo $row['T_ID']; ?></td>
 
                                 <td>
                                     <?php echo $row['PAYMENT_DATE']; ?>
@@ -73,11 +71,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                                 <td>
                                     <?php echo $row['TRANSACTION_ID']; ?>
                                 </td>
-                                <td style="font-weight: 700; color: <?php echo ($row['STATUS'] == 'VERIFIED')? "var(--success)" : "var(--danger)"; ?>;">
+                                <td style="font-weight: 700; color: <?php echo ($row['STATUS'] == 'VERIFIED') ? "var(--success)" : "var(--danger)"; ?>;">
                                     <?php echo $row['STATUS']; ?>
                                 </td>
                                 <td>
-                                    <button onclick="verifyPayment('<?php echo $row['UID']; ?>')">
+                                    <button onclick="verifyPayment('<?php echo $row['T_ID']; ?>')">
                                         <i class="fa-solid fa-check"></i>
                                     </button>
                                 </td>
@@ -85,7 +83,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                                     <button onclick="openFile('<?php echo $row['SCREENSHOT']; ?>')">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
-                                    <button onclick="downloadFile('<?php echo $row['SCREENSHOT']; ?>', '<?php echo $row['UID']; ?>')">
+                                    <button onclick="downloadFile('<?php echo $row['SCREENSHOT']; ?>', '<?php echo $row['T_ID']; ?>')">
                                         <i class="fa-solid fa-download"></i>
                                     </button>
                                 </td>
@@ -126,11 +124,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                 $("#fileViewer").attr('src', filePath);
             }
 
-            function downloadFile(filePath, uid) {
+            function downloadFile(filePath, t_id) {
                 filePath = filePath.replace('./', '../');
                 var a = document.createElement('a');
                 a.href = filePath;
-                a.download = 'Payment_Screenshot_' + uid;
+                a.download = 'Payment_Screenshot_' + t_id;
                 a.click();
             }
 
@@ -151,6 +149,28 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                     }
                 });
             });
+
+            function verifyPayment(teamID) {
+                $.ajax({
+                    url: './paymentOperation.php',
+                    type: 'POST',
+                    data: {
+                        teamID: teamID,
+                        action: 'verify'
+                    },
+                    success: function(data) {
+
+                        data = JSON.parse(data);
+
+                        if (data.status == 'success') {
+                            $("#row-" + teamID).children(":nth-child(5)").css('color', 'var(--success)');
+                            $("#row-" + teamID).children(":nth-child(5)").text('VERIFIED');
+                        } else {
+                            $("body").prepend(`<span class='message error'>${data.message}</span>`);
+                        }
+                    }
+                });
+            }
         </script>
 
     </body>
