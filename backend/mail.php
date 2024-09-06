@@ -14,16 +14,24 @@ $mail->isSMTP();
 $mail->Host = "smtp.gmail.com";
 $mail->SMTPAuth = true;
 $mail->Username = "hackfest@esec.ac.in";
-$mail->Password = "knyyxdbjdsvxguhl";
+$mail->Password = "kkepwfszvkvkjmrb";
 $mail->SMTPSecure = "ssl";
 $mail->Port = 465;
+
+$mail->SMTPOptions = array(
+    'ssl' => array(
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+    )
+);
 
 $fromAddress = "hackfest@esec.ac.in";
 $fromName = "Hackfest - Erode Sengunthar Engineering College";
 
 $mail->setFrom($fromAddress, $fromName);
 
-function sendMail( $email, $subject, $msg, $name='')
+function sendMail($email, $subject, $msg, $name = '')
 {
     global $mail;
     $mail->addAddress($email, $name);

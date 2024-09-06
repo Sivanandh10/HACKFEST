@@ -37,12 +37,6 @@
                     <span>Payments</span>
                 </a>
             </li>
-            <li class="coordinatorList">
-                <a href="./coordinatorList.php">
-                    <i class="fa fa-user-gear" aria-hidden="true" title="Dashboard"></i>
-                    <span>Coordinator</span>
-                </a>
-            </li>
             <li class="logout">
                 <a href="./logout.php">
                     <i class="fa fa-arrow-right-from-bracket" aria-hidden="true" title="Dashboard"></i>

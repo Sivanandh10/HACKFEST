@@ -35,7 +35,7 @@ if (isset($_POST['payment'])) {
         }
 
         $paymentScreenshotNameNew = $teamID . "." . $paymentScreenshotActualExt;
-        $paymentScreenshotDestination = './uploads/payments/' . $paymentScreenshotNameNew;
+        $paymentScreenshotDestination = './assets/payments/' . $paymentScreenshotNameNew;
 
         $sql = "INSERT INTO payment ( T_ID, PAYMENT_DATE, TRANSACTION_ID, SCREENSHOT) VALUES ('$teamID', '$paymentDate', '$transactionId', '$paymentScreenshotDestination')";
         $result = mysqli_query($conn, $sql);

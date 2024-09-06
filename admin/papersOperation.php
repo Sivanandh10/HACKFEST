@@ -9,9 +9,9 @@ function deleteTeam($teamID)
 
     $query = "SELECT * FROM teams WHERE T_ID = '$teamID'";
     $result = mysqli_query($conn, $query);
-    
+
     $row = mysqli_fetch_assoc($result);
-    
+
     $file = "../assets/uploads/" . $row['T_ID'] . ".pdf";
 
     if (file_exists($file)) {
@@ -117,16 +117,30 @@ if (isset($_POST['performOperation']) && isset($_POST['operation']) && isset($_P
                 $result = mysqli_query($conn, $query);
             }
 
-            $query = "SELECT * FROM registration JOIN teams ON registration.T_ID=teams.T_ID WHERE registration.T_ID = '$teamID'";
+            $query = "SELECT * FROM registration JOIN teams ON registration.T_ID=teams.T_ID WHERE registration.T_ID = '$teamID' LIMIT 1";
             $result = mysqli_query($conn, $query);
             $row = mysqli_fetch_assoc($result);
-            
+
             $name = $row['NAME'];
             $email = $row['EMAIL'];
             $teamTitle = $row['TITLE'];
 
             $body = file_get_contents('../assets/mails/acceptanceMail.html');
-            foreach($mailvars as $key => $value) {
+
+            $mailvars = array(
+                "participant_name" => $name,
+                "contact_mail" => $contactMail,
+                "abstract_title" => $teamTitle,
+                "registration_fee" => "Rs. 350 /- per Head",
+                "account_holder_name" => "The Principal",
+                "account_number" => "500101012422890",
+                "ifsc_code" => "CIUB0000059",
+                "bank_name" => "City Union Bank",
+                "branch" => "Erode Branch",
+                "payment_proof_link" => $paymentLink,
+            );
+
+            foreach ($mailvars as $key => $value) {
                 $body = str_replace('{{' . $key . '}}', $value, $body);
             }
 

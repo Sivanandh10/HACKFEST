@@ -14,7 +14,7 @@
 
     <?php include "./loader.php"; ?>
 
-    <?php include "./nav.php"; ?>
+    <?php include "./nav.php";?>
 
     <div class="container d-flex justify-content-center my-3">
         <form action="./backend/register.php" class="bg-white" style="width: min(500px, 90%);"  method="POST" enctype="multipart/form-data">

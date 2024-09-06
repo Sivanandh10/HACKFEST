@@ -21,7 +21,7 @@ function sendOTP($email, $otp) {
             echo "failed";
         }
     } catch (Exception $e) {
-        echo "failed";
+        echo "failed" . $e;
     }
 }
 
