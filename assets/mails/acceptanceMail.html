@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Abstract Accepted for HackFest 2k24</title>
   </head>
-  <body style="background-color: #d9d9d9; font-family: 'Open Sans'; margin: 0; padding: 0;">
+  <body style="background-color: #d9d9d9; font-family: Arial, Helvetica, sans-serif; margin: 0; padding: 0;">
     <section style="width: 90%; margin: 0 auto; padding: 1rem; background-color: #fff;">
       <h3 style="font-size: 1.5rem;">Hi {{participant_name}},</h3>
       <br /><br />
       <p style="text-indent: 30px; text-align: justify;">
-        Exciting news! Your abstract, <span style="font-weight: 700;">"{{abstract_title}},"</span> has been selected for presentation at HackFest 2k24.
+        Exciting news! Your abstract, <span style="font-weight: 700;">"{{abstract_title}},"</span> with the Team ID: {{team_id}}, has been selected for presentation at HackFest 2k24.
       </p>
       <br />
       <p style="text-indent: 30px; text-align: justify;">
-        To confirm your participation, please complete the registration by paying the fee of {{registration_fee}}. You can make the payment to the following bank account:
+        To confirm your participation, please complete the registration by paying the fee of {{total_fee}} for your team ({{registration_fee}}). You can make the payment to the following bank account:
       </p>
       <br />
       <div style="font-size: 1rem;">
@@ -24,6 +24,8 @@
         <span style="display: inline-block; font-weight: 700; margin: 10px 0 10px 2rem;">Bank Name:</span> {{bank_name}} <br />
         <span style="display: inline-block; font-weight: 700; margin: 10px 0 10px 2rem;">Branch:</span> {{branch}} <br />
       </div>
+      <!-- attach payment qr -->
+      <img src="{{payment_qr}}" alt="Payment QR" style="display: block; margin: 20px auto; width: min(200px, 90%); height: auto;" />
       <br>
       <p style="text-indent: 30px; text-align: justify;">
         After making the payment, please upload your payment proof by clicking the button below:

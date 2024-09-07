@@ -39,10 +39,16 @@ function sendMail($email, $subject, $msg, $name = '')
     $mail->Subject = $subject;
     $mail->Body = $msg;
 
-    if ($mail->send()) {
-        $mail->clearAddresses();
-        return true;
-    } else {
+    try {
+
+        if ($mail->send()) {
+            $mail->clearAddresses();
+            return true;
+        } else {
+            $mail->clearAddresses();
+            return false;
+        }
+    } catch (Exception $e) {
         $mail->clearAddresses();
         return false;
     }

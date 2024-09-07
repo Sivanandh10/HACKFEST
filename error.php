@@ -47,5 +47,21 @@ if (isset($_GET['error'])) {
     if ($error == "fileDownloadError") {
         echo "<span class='message error'>File Download Error</span>";
     }
+
+    if ($error == "mailerror") {
+        echo "<span class='message error'>Can't send mail. Please contact our team to know your details.</span>";
+    }
+}
+
+else if (isset($_GET['success'])) {
+    $success = $_GET['success'];
+
+    if ($success == "uploadSuccess") {
+        echo "<span class='message success'>File Uploaded Successfully</span>";
+    }
+
+    if ($success == "paymentSuccess") {
+        echo "<span class='message success'>Payment Details Uploaded Successfully</span>";
+    }
 }
 ?>

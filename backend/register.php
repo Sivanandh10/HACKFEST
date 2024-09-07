@@ -1,6 +1,7 @@
 <?php
 
 include "../config.php";
+include "./mail.php";
 
 function generateHackfestID($conn)
 {
@@ -103,13 +104,44 @@ if (isset($_POST['register'])) {
         $sql = "INSERT INTO registration ( NAME, EMAIL, MOBILE, YEAR, DEPARTMENT, COLLEGE, GENDER, T_ID ) VALUES ('$tl_name', '$tl_email', '$tl_phone', '$tl_year', '$tl_dept', '$college', '$tl_gender', '$hackfestID')";
         if (mysqli_query($conn, $sql)) {
 
-            for ($i = 0; $i <= count($tm_name); $i++) {
+            for ($i = 0; $i < count($tm_name); $i++) {
                 $sql = "INSERT INTO registration ( NAME, EMAIL, MOBILE, YEAR, DEPARTMENT, COLLEGE, GENDER, T_ID ) VALUES ('$tm_name[$i]', '$tl_email', '$tm_phone[$i]', '$tm_year[$i]', '$tm_dept[$i]', '$college', '$tm_gender[$i]', '$hackfestID')";
 
                 if (!mysqli_query($conn, $sql)) {
                     header("Location: ../register.php?error=sqlerror");
                 }
             }
+
+            // Send Mail
+            $team_mate = "<li style='margin-bottom: 10px;'>
+                            <p style='margin: 0; padding: 0; font-size: 1.5rem; font-weight: 600;'>Team Members</p>";
+            for ($i = 0; $i < count($tm_name); $i++) {
+                $team_mate .= "<p style='margin: 0; padding: 0; font-size: 1.2rem; font-weight: 400; text-indent: 10px;'>$tm_name[$i]</p>";
+            }
+
+            $team_mate .= "</li>";
+
+            $contactMail = "hackfest@esec.ac.in";
+
+            $mailvars = array(
+                "participant_name" => $tl_name,
+                "team_id" => $hackfestID,
+                "contact_mail" => $contactMail,
+                "project_title" => $t_title,
+                "team_mate" => $team_mate
+            );
+
+            $body = file_get_contents("../assets/mails/registration.html");
+            foreach ($mailvars as $key => $value) {
+                $body = str_replace('{{' . $key . '}}', $value, $body);
+            }
+
+            if (sendMail($tl_email, "Hackfest Registration", $body)) {
+                header("Location: ../register.php?success=registered");
+            } else {
+                header("Location: ../register.php?error=mailerror");
+            }
+
 
             header("Location: ../register.php?success=registered");
         } else {

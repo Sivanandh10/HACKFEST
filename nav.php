@@ -22,6 +22,9 @@
                 <a class="nav-link" href="./#contact">Contact</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="./uploadPaperForm.php">Upload Abstract</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="./paymentScreenshot.php">Payment Proof</a>
             </li>
             <li class="nav-item">

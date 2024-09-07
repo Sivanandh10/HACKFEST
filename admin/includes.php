@@ -12,4 +12,4 @@ $url = "http" . (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] === "on" ? "s" : 
 <link rel="stylesheet" href="<?php echo $url; ?>/admin/css/style.css?<?php echo time();?>">
 
 <!-- TiTle Icon -->
-<link rel="icon favicon" href="<?php echo $url; ?>/img/logo/logo.png">
+<link rel="icon favicon" href="<?php echo $url; ?>/assets/img/logo.png">

@@ -8,17 +8,132 @@
     <title>Register - HackFest | Erode Sengunthar Engineering College</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <style>
+        :root {
+            /* --primary: #5f27cd; */
+            --primary: #ff6969;
+            --secondary: #222327;
+            --light: #ffffff;
+            --danger: #d63031;
+            --success: #00b894;
+            --warning: #f1c40f;
+        }
+
+        .message {
+            background-color: var(--light);
+            color: var(--secondary);
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 1rem;
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            overflow: hidden;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            transition: all .5s ease-in-out;
+            animation: message 5s forwards;
+        }
+
+        @keyframes message {
+            0% {
+                transform: translateY(-200%);
+                opacity: 0;
+            }
+
+            10% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            90% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-200%);
+                opacity: 0;
+            }
+        }
+
+        .message::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            animation: message-after 5s ease-in-out forwards;
+        }
+
+        .message.error::after {
+            background-color: var(--danger);
+        }
+
+        .message.success::after {
+            background-color: var(--success);
+        }
+
+        @keyframes message-after {
+            0% {
+                width: 100%;
+            }
+
+            100% {
+                width: 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
 
-    <?php include "./loader.php"; ?>
+    <?php
+    include "./loader.php";
 
-    <?php include "./nav.php";?>
+    include "./nav.php";
+
+    if (isset($_GET['error'])) {
+        $error = $_GET['error'];
+        if ($error == "emptyfields") {
+            echo '<div class="message error">Fill in all fields</div>';
+        } else if ($error == "mailExists") {
+            echo '<div class="message error">Email already exists</div>';
+        } else if ($error == "uploadFailed") {
+            
+        }
+    }
+
+    if (isset($_GET['success'])) {
+        if ($_GET['success'] == "registered") {
+            echo '<div class="message success">Registered Successfully</div>';
+        }
+    }
+
+    ?>
 
     <div class="container d-flex justify-content-center my-3">
-        <form action="./backend/register.php" class="bg-white" style="width: min(500px, 90%);"  method="POST" enctype="multipart/form-data">
+        <form action="./backend/register.php" class="bg-white" style="width: min(500px, 90%);" method="POST" enctype="multipart/form-data">
             <h2>Registration</h2>
+
+            <div class="alert alert-warning d-flex column-gap-3" role="alert">
+                <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+                <div>
+                    <h6>Kindly Read the Instructions Before Filling the Form</h6>
+                    <ul>
+                        <li>Enter your <b>email</b> and verify it with an <b>OTP</b> before submitting the form.</li>
+                        <li>Ensure that you have entered the details of all the <b>team members</b>.</li>
+                        <li><b>Team members</b> can be from different departments within the same college.</li>
+                        <li><b>Team members</b> from different colleges should not be combined.</li>
+                        <li>Once the form is submitted, you will not be able to change the <b>team members</b>.</li>
+                        <li>The project abstract should be in <b>PDF</b> format and less than <b>5 MB</b>.</li>
+                        <li>Verify all the details before submitting the form.</li>
+                    </ul>
+                </div>
+            </div>
+
             <div class="mb-3">
                 <label for="tl-name" class="form-label">Team Leader Name</label>
                 <input type="text" name="tl-name" id="tl-name" placeholder="Enter Team Leader Name" class="form-control" required>
@@ -68,7 +183,7 @@
 
             <div id="team-members" class="my-3"></div>
 
-            <button class="btn btn-warning my-3 d-block w-auto ms-auto" onclick="addNewMember()">Add Team Member</button>
+            <button class="btn btn-warning my-3 d-block w-auto ms-auto" onclick="addNewMember()" type="button">Add Team Member</button>
 
             <div class="mb-3">
                 <label for="college" class="form-label">College</label>
@@ -136,7 +251,7 @@
             if ($("#team-members").children().length < 4) {
                 $("#team-members").append(member);
             } else {
-                alert("You can add only 3 members");
+                $("body").append(`<span class="message error">You can add upto 3 members</span>`);
             }
 
         }
@@ -158,6 +273,8 @@
                     },
                     success: function(data) {
                         if (data == "success") {
+
+                            // Append OTP field
                             var otpField = `<div class="input-group mt-3">
                                 <input type="text" name="otp" id="otp" placeholder="Enter OTP" class="form-control" required>
                                 <button class="btn btn-outline-primary" type="button" onclick="verifyOTP()">Verify</button>
@@ -176,16 +293,23 @@
 
                             // Add OTP field
                             $("#otp-field").html(otpField);
+
+                            $("body").append(`<span class="message success">OTP sent to your mail id.</span>`);
+                        } else if (data == "exists") {
+                            $("body").append(`<span class="message error">Email already exists</span>`);
                         } else {
-                            alert("Failed to send OTP");
+                            $("body").append(`<span class="message error">Failed to send OTP</span>`);
                         }
 
                         // Hide Loader
                         hideLoader();
                     }
                 });
+            } else if ($("#emailStatus").val() == "true") {
+                $("body").append(`<span class="message error">Email already verified</span>`);
             } else {
-                alert("Enter Email to verify");
+                $("body").append(`<span class="message error">Enter Email to send OTP</span>`);
+                $("#tl-email").focus();
             }
         }
 
@@ -205,14 +329,18 @@
                     },
                     success: function(data) {
                         if (data == "success") {
-                            alert("OTP Sent");
+                            $("body").append(`<span class="message success">OTP sent to your mail id.</span>`);
+
+                            // reset entered OTP
+                            $("#otp").val("");
                         } else {
-                            alert("Failed to send OTP");
+                            $("body").append(`<span class="message error">Failed to resend OTP</span>`);
                         }
                     }
                 });
             } else {
-                alert("Enter Email to verify");
+                $("body").append(`<span class="message error">Enter Email to resend OTP</span>`);
+                $("#tl-email").focus();
             }
 
             // Hide Loader
@@ -239,7 +367,8 @@
                     },
                     success: function(data) {
                         if (data == "success") {
-                            alert("OTP Verified");
+                            $("body").append(`<span class="message success">Email Verified Successfully.</span>`);
+
                             $("#otp-field").html("");
                             $("#tl-email").attr("readonly", true);
 
@@ -251,8 +380,10 @@
 
                             $("#tl-email").parent().find("button").text("Email Verified");
                             $("#tl-email").parent().find("button").attr("disabled", true);
+                        } else if (data == "exists") {
+                            $("body").append(`<span class="message error">Email already exists</span>`);
                         } else {
-                            alert("Failed to verify OTP");
+                            $("body").append(`<span class="message error">Invalid OTP</span>`);
                         }
 
                         // Hide Loader
@@ -260,7 +391,8 @@
                     }
                 });
             } else {
-                alert("Enter OTP to verify");
+                $("body").append(`<span class="message error">Enter OTP to verify</span>`);
+                $("#otp").focus();
             }
         }
 

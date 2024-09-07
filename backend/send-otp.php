@@ -21,13 +21,22 @@ function sendOTP($email, $otp) {
             echo "failed";
         }
     } catch (Exception $e) {
-        echo "failed" . $e;
+        echo "failed";
     }
 }
 
 // Send OTP
 if (isset($_POST['email']) && isset($_POST['sendOTP'])) {
     $email = $_POST['email'];
+
+    $sql = "SELECT * FROM registration WHERE EMAIL='$email'";
+    $result = mysqli_query($conn, $sql);
+    if (mysqli_num_rows($result) > 0) {
+        echo "exists";
+        exit();
+    }
+
+
     $otp = rand(100000, 999999);
 
     $query = "INSERT INTO otp (EMAIL, OTP) VALUES ('$email', '$otp')";

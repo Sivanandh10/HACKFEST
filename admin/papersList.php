@@ -61,8 +61,9 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                     if ($result->num_rows > 0) {
                         $i = 1;
                         while ($row = $result->fetch_assoc()) {
+                            $class = ($row['STATUS'] == 'REJECTED') ? 'rejected' : (($row['STATUS'] == 'DELETED') ? 'deleted' : '');
                     ?>
-                            <tr id="row-<?php echo $row['T_ID']; ?>">
+                            <tr id="row-<?php echo $row['T_ID']; ?>" class="<?php echo $class; ?>">
                                 <td><?php echo $i; ?></td>
                                 <td><?php echo $row['T_ID']; ?></td>
                                 <td><?php echo $row['TITLE']; ?></td>
@@ -121,7 +122,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                     "UPLOADED": "var(--secondary)",
                     "UNDER REVIEW": "var(--warning)",
                     "ACCEPTED": "var(--success)",
-                    "REJECTED": "var(--danger)"
+                    "REJECTED": "var(--danger)",
+                    "DELETED": "#808080"
                 }
 
                 $("td:contains('UPLOADED')").css('color', colors['UPLOADED']);
@@ -179,7 +181,25 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                                 }
 
                                 if (operation == 'delete') {
-                                    $(`#row-${t_id}`).remove();
+                                    $(`#row-${t_id}`).addClass('deleted');
+                                }
+
+                                // Update status in table
+                                if (response.team_status) {
+                                    $(`#row-${t_id} td:nth-child(4)`).text(response.team_status);
+                                    $(`#row-${t_id} td:nth-child(4)`).css('color', colors[response.team_status]);
+
+                                    if (response.team_status == 'REJECTED') {
+                                        $(`#row-${t_id}`).addClass('rejected');
+                                    }
+
+                                    if (response.team_status == 'ACCEPTED') {
+                                        $(`#row-${t_id}`).removeClass('rejected');
+                                    }
+
+                                    if (response.team_status == 'DELETED') {
+                                        $(`#row-${t_id}`).addClass('deleted');
+                                    }
                                 }
 
                             } else {
